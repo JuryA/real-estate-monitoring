@@ -19,11 +19,11 @@ class RealEstateDiscover(Spider):
 
     def start_requests(self):
         self.city = getattr(self,'city','')
-        if self.city == '':
+        if not self.city:
             raise ValueError("You must provide 'city' parameter! eg. -a city='budapest'")
+        max_page = 100 # extract listings from the first 100 pages (modify to fit your needs)
+
         for url in self.start_urls:
-            max_page = 100 # extract listings from the first 100 pages (modify to fit your needs)
-            
             # it's assumed that you'll be able to paginate using a pattern like 'site.com/page1 .. page2 .. page2 etc'
             # if that's not the case you need to change this pagination logic
             for page_number in range(1, max_page+1):

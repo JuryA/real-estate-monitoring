@@ -57,37 +57,36 @@ def clean_building_floors(value):
 
 def clean_property_type(value):
     value = value.strip()
-    if "Eladó panel lakás" == value:
+    if value == "Eladó panel lakás":
         return "panel"
-    elif "Eladó tégla építésű lakás" == value:
+    elif value == "Eladó tégla építésű lakás":
         return "tégla lakás"
-    elif "Tégla építésű lakás bérleti joga átadó" == value or "Panel lakás bérleti joga átadó" == value:
+    elif value in [
+        "Tégla építésű lakás bérleti joga átadó",
+        "Panel lakás bérleti joga átadó",
+    ]:
         return "bérleti jog"
     elif "csúszózsalus" in value:
         return "csúszózsalus"
     elif "lakóparkban" in value:
         return "lakópark"
-    elif "Eladó ikerház" == value:
+    elif value == "Eladó ikerház":
         return "ikerház"
-    elif "Eladó sorház" == value:
+    elif value == "Eladó sorház":
         return "sorház"
-    elif "Eladó családi ház" == value:
+    elif value == "Eladó családi ház":
         return "családi ház"
-    elif "Eladó házrész" == value:
+    elif value == "Eladó házrész":
         return "házrész"
-    elif "Eladó könnyűszerkezetes ház" == value:
+    elif value == "Eladó könnyűszerkezetes ház":
         return "könnyűszerkezetes ház"
     return value.replace("Eladó", "").strip()
 
 def clean_build_year(value):
-    if "nincs megadva" in value:
-        return None    
-    return value.strip()
+    return None if "nincs megadva" in value else value.strip()
     
 def clean_property_condition(value):
-    if "nincs megadva" in value:
-        return None
-    return value.strip()
+    return None if "nincs megadva" in value else value.strip()
 
 class RealEstateItem(Item):
     url = Field()
